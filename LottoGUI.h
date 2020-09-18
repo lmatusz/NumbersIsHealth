@@ -2,6 +2,18 @@
 
 #ifndef LottoGUI_h
 #define LottoGUI_h
+#include <iostream>
+#include <istream>
+#include <ostream>
+#include <string>
+#include <vector>
+
+#include <cstdlib>
+#include <iostream>
+#include <boost/bind/bind.hpp>
+#include <boost/asio.hpp>
+#include <boost/asio/ssl.hpp>
+#include <boost/regex.h>
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Table.H>
