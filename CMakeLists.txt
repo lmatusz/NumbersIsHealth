@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.10...3.16)
+
 project(NumbersIsHealth)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -16,9 +17,15 @@ ADD_SUBDIRECTORY(tidy-html5 tidy-html5)
 ADD_EXECUTABLE(LottoGUI
         LottoGUI.cxx
         LottoGUI.h)
+TARGET_INCLUDE_DIRECTORIES(LottoGUI PRIVATE ${FLTK_INCLUDE_DIRS})
+
+MESSAGE(STATUS ${FLTK_INCLUDE_DIRS})
 
 TARGET_LINK_DIRECTORIES(LottoGUI PRIVATE mingw32/i686-w64-mingw32)
-TARGET_LINK_LIBRARIES(LottoGUI mingw32 ssl crypto fltk ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(LottoGUI ssl crypto fltk ${Boost_LIBRARIES})
 IF(${WIN32})
-    TARGET_LINK_LIBRARIES(LottoGUI ws2_32 wsock32)
-    ENDIF()
+    TARGET_LINK_LIBRARIES(LottoGUI mingw32 ws2_32 wsock32)
+ENDIF()
+IF(${UNIX})
+    TARGET_LINK_LIBRARIES(LottoGUI pthread)
+ENDIF()
