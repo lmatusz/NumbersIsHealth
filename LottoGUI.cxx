@@ -144,31 +144,37 @@ protected:
 
             // Get a list of endpoints corresponding to the server name.
             tcp::resolver resolver(io_context);
-            std::string host = "www.wynikilotto.net.pl";
+            std::string host = "www.duckduckgo.com";
             tcp::resolver::results_type endpoints = resolver.resolve(host, "https");
 
             boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23_client);
 
             std::string request_stream;
-            request_stream.append("GET /mini-lotto/wyniki/ HTTP/1.0\r\n");
-            //request_stream.append("Content-Type: application/x-www-form-urlencoded\r\n");
-            request_stream.append("Host: " + host + "\r\n");
-            request_stream.append("User-Agent: Mozilla\r\n");
-            request_stream.append("Accept: */*\r\n");
-            request_stream.append("Connection: keep-alive\r\n");
-            request_stream.append("\r\n\r\n");
-//            switch (count)
-//            {
-//                case FIVE_HUNDRED:
-//                    request_stream.append("ile=500&order=0");
-//                    break;
-//                case TWO_HUNDRED:
-//                    request_stream.append("ile=200&order=0");
-//                    break;
-//                case TWENTY:
-//                    request_stream.append("ile=20&order=0");
-//                    break;
-//            }
+            request_stream.append("GET / HTTP/1.0\n\n"); //mini-lotto/wyniki/
+            //request_stream.append("method: POST\n");
+            //request_stream.append("httpVersion: http/2.0\n");
+            //request_stream.append("authority: www.wynikilotto.net.pl\n");
+            //request_stream.append("scheme: https\n");
+            //request_stream.append("cache-control: max-age=0\n");
+            //request_stream.append("upgrade-insecure-requests: 1\n");
+            //request_stream.append("origin: https://www.wynikilotto.net.pl\n");
+            //request_stream.append("referer: https://www.wynikilotto.net.pl/mini-lotto/wyniki/\n");
+            //request_stream.append("accept-encoding: gzip, deflate, br\n");
+            //request_stream.append("Host: www.wynikilotto.net.pl\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\nAccept-Language: pl,en-US;q=0.7,en;q=0.3\nAccept-Encoding: gzip, deflate, br\nContent-Type: application/x-www-form-urlencoded\nContent-Length: 7\nReferer: https://www.wynikilotto.net.pl/mini-lotto/wyniki/\nOrigin: https://www.wynikilotto.net.pl\nUpgrade-Insecure-Requests: 1\nConnection: keep-alive\nCookie: yNickname=Niezalogowany; _ga=GA1.3.1053979805.1600428499; cookies_accept=T; _gid=GA1.3.2048169598.1600721759; PHPSESSID=v967osqjnie313q2elnfrmk0jm; _gat=1\nTE: Trailers\n\n");
+
+            switch (count)
+            {
+                case FIVE_HUNDRED:
+                    //request_stream.append("ile=500");
+                    break;
+                case TWO_HUNDRED:
+                    //request_stream.append("ile=200&order=0");
+                    break;
+                case TWENTY:
+                    //request_stream.append("ile=20&order=0");
+                    break;
+            }
+            std::cout << request_stream << std::endl;
 
             ssl_client _client(io_context, ctx, endpoints, request_stream);
 

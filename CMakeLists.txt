@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10...3.16)
 
 project(NumbersIsHealth)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include_directories(.)
 
@@ -13,6 +13,7 @@ SET(Boost_USE_STATIC_LIBS ON)
 FIND_PACKAGE(Boost REQUIRED)
 FIND_PACKAGE(LibXml2 REQUIRED)
 ADD_SUBDIRECTORY(tidy-html5 tidy-html5)
+ADD_SUBDIRECTORY(asio_http)
 
 ADD_EXECUTABLE(LottoGUI
         LottoGUI.cxx
