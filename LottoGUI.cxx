@@ -17,9 +17,9 @@ public:
     {
         request_ = request;
         socket_.set_verify_mode(boost::asio::ssl::verify_none);
-        socket_.set_verify_callback(
-                boost::bind(&ssl_client::verify_certificate, this,
-                            boost::placeholders::_1, boost::placeholders::_2));
+//        socket_.set_verify_callback(
+//                boost::bind(&ssl_client::verify_certificate, this,
+//                            boost::placeholders::_1, boost::placeholders::_2));
 
         boost::asio::async_connect(socket_.lowest_layer(), endpoints,
                                    boost::bind(&ssl_client::handle_connect, this,
@@ -193,7 +193,7 @@ protected:
             case Fl_Table::CONTEXT_CELL:
                 fl_draw_box(FL_THIN_UP_BOX, X,Y,W,H, FL_GRAY);
                 fl_push_clip(X+3, Y+3, W-6, H-6);
-                fl_color(FL_GREEN);
+                fl_color(FL_DARK_BLUE);
                 fl_font(FL_COURIER, 12);
                 if (0 == R)
                 {
